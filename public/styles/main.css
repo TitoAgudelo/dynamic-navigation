@@ -1,0 +1,329 @@
+@import "fonts.css";
+/* default css and global */
+body {
+  color: #fff;
+}
+
+h1 {
+  position: relative;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-family: HUGEAvantGardeBold;
+  font-size: 120px;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  padding:0;
+  margin:0;
+}
+ 
+/* menu style */
+.menu_bar {
+  display:none;
+}
+
+ 
+header {
+  width: 100%;
+}
+ 
+header nav {
+  background: #ec008c;
+  z-index: 1000;
+  width: 100%;
+  margin: 0;
+}
+ 
+header nav ul {
+  list-style:none;
+}
+
+header nav ul.title-area {
+  float: left;
+}
+
+header nav ul.title-area a {
+  text-transform: uppercase;
+}
+
+header nav ul.title-area .toggle-menu {
+  display: none;
+}
+
+header nav ul#menu-navigation {
+  margin-left: 75px;
+}
+ 
+header nav ul li {
+  display:inline-block;
+  position: relative;
+}
+ 
+header nav ul li a:hover, header nav ul li.active a {
+  background: white;
+  color: #ec008c;
+}
+ 
+header nav ul li a {
+  color:#fff;
+  display:block;
+  text-decoration:none;
+  font-family: HUGEAvantGardeBold;
+  font-size: 21px;
+  height: 24px;
+  vertical-align: middle;
+  padding: 24px;
+  text-rendering: optimizeLegibility;
+}
+ 
+header nav ul li a span {
+  margin-right:10px;
+}
+ 
+header nav ul li.active .sub-menu {
+  display:block;
+}
+ 
+header nav ul li .sub-menu {
+  display: none;
+  background: white;
+  position: absolute;
+  width: 175%;
+  padding: 12px 0;
+  z-index:1000;
+}
+ 
+header nav ul li .sub-menu li {
+  display:block;
+  overflow: hidden;
+}
+ 
+header nav ul li .sub-menu li a {
+  display: block;
+  color: black;
+  font-size: 16px;
+  height: 16px;
+  padding: 16px;
+}
+
+header nav ul li .sub-menu li:hover a {
+  color: #ec008c;
+  background-color: #eee;
+}
+ 
+header nav ul li .sub-menu li a span {
+  float: right;
+  position: relative;
+  top:3px;
+  margin-right:0;
+  margin-left:10px;
+}
+ 
+header nav ul li .caret {
+  position: relative;
+  top:3px;
+  margin-left:10px;
+  margin-right:0px;
+}
+
+.page {
+  background: url("../images/background-image.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 640px;
+  height: 640px;
+}
+
+/* mask */
+.page .allContent {
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    top: 72px;
+    z-index: 500;
+}
+
+.lorem {
+  margin-top: 60px;
+}
+ 
+.lorem p {
+  color: black;
+  width: 968px;
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.copy {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  header {
+    width: 85%;
+    position: absolute;
+  }
+
+  header nav {
+    background: transparent;
+  }
+
+  .content {
+    height: 640px;
+    left: 85%;
+    position: absolute;
+  }
+
+  header .title-area {
+    background-color: #ec008c; 
+    position: absolute;
+    width: 118%;
+  }
+
+  header .title-area .name {
+    display: none;
+  }
+
+  header nav ul.title-area .toggle-menu {
+    display: block;
+    width: 100%;
+  }
+
+  header nav ul.title-area .toggle-menu a {
+    display: inline-block;
+    padding: 20px 24px;
+    width: 24px;
+    height: 20px;
+  }
+
+  header nav ul li a:hover {
+    background: #ec008c;
+    color: white;
+  }
+
+  header nav ul#menu-navigation {
+    margin-left: 0;
+    margin-top: 60px;
+    background-color: white;
+    padding: 12px 0;
+    position: absolute;
+  }
+ 
+  header nav ul#menu-navigation a {
+    color: black;
+  }
+
+  header nav ul#menu-navigation li:hover a {
+    color: #ec008c;
+    background-color: #eee;
+  }
+
+  .menu_bar {
+    display:block;
+    width:100%;
+    position: fixed;
+    top:0;
+    background:#E6344A;
+  }
+ 
+  .menu_bar .bt-menu {
+    display: block;
+    padding: 20px;
+    color: #fff;
+    overflow: hidden;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+ 
+  .menu_bar span {
+    float: right;
+    font-size: 40px;
+  }
+ 
+  header nav {
+    right:100%;
+    margin: 0;
+    overflow: scroll;
+  }
+ 
+  header nav ul li {
+    display: block;
+  }
+ 
+  header nav ul li a {
+    display: block;
+  }
+ 
+  header nav ul li:hover .children {
+    display: none;
+  }
+ 
+  header nav ul li .children {
+    width: 100%;
+    position: relative;
+  }
+ 
+  header nav ul li .children li a {
+    margin-left:20px;
+  }
+ 
+  header nav ul li .caret {
+    float: right;
+  }
+
+  .toggle-menu #toggleOpen {
+    cursor: pointer;
+    background-image: url("../images/toggle-open.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .toggle-menu #toggleClose {
+    cursor: pointer;
+    background-image: url("../images/toggle-close.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .copy {
+    padding: 40px 24px;
+    background-color: white;
+    bottom: 0;
+    color: black;
+    display: none;
+  }
+
+  .displayNone {
+    visibility: hidden;
+  }
+
+  .display {
+    visibility: visible;
+  }
+
+  #slide {
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+  }
+
+  @-webkit-keyframes slide {
+      100% { left: 0; }
+  }
+
+  @keyframes slide {
+      100% { left: 0; }
+  }
+}
