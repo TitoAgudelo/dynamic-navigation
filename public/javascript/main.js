@@ -29,7 +29,7 @@
 		        	childCount--;
 	    		}
                 // if childrends concat html
-    			parent += '<li class="principal"><a href="'+item.url+'" target="_blank">'+item.label+'</a><ul class="sub-menu">'+subMenu+'</ul></li>';
+    			parent += '<li class="principal"><a href="'+item.url+'" target="_blank">'+item.label+'</a><span class="down"></span><ul class="sub-menu">'+subMenu+'</ul></li>';
 
     		} else {
     			// if no childrens concact html
@@ -42,9 +42,7 @@
     	document.getElementById("menu-navigation").innerHTML = parent;
         // run clickELement for event click listener 
         clickElement();
-        if($(window).width() < 768) {
-            mobile();
-        }
+        mobile();
     };
 
     function clickElement(){ 
@@ -53,6 +51,7 @@
         var myFunction = function() {
             // li element with a class principal found
             var page = document.getElementById("mask");
+
             // if need close with a other click in the same menu bottom
             if(this.className == 'active') {
                 this.setAttribute("class", "");
@@ -74,7 +73,14 @@
                         page.addEventListener('click', unMenu, false);
                     }
                 }
-            }            
+            }
+            // mobile action icon
+            if(this.getElementsByClassName("down")[0]){
+                this.getElementsByClassName("down")[0].setAttribute("class", "up");
+            } else if(this.getElementsByClassName("up")[0]){
+                this.getElementsByClassName("up")[0].setAttribute("class", "down");
+                
+            }         
         };
 
         var unMenu = function() {
@@ -95,30 +101,61 @@
     };
 
     function mobile() {
-        var open = document.getElementById("toggleOpen");
+        var open = document.getElementById("toggleOpen"),
+            copy = document.getElementsByClassName("copy")[0],
+            slide = document.getElementById("menu-navigation"),
+            content = document.getElementById("content"),
+            logo = document.getElementById("name");
 
-        var toggleOpen =  function() {
-            var copy = document.getElementsByClassName("copy")[0],
-                slide = document.getElementById("menu-navigation"),
-                content = document.getElementById("content");
+        function toggleOpen() {
+            
             content.setAttribute("class", "content");
-            slide.setAttribute("class", "slide");
-            copy.setAttribute("class", "display");
-            open.setAttribute("class", "displayNone");
+            logo.setAttribute("style", "display: inline-block;")
+            copy.setAttribute("class", "visibility");
+            open.setAttribute("style", "visibility: none;");
+            slide.setAttribute("name", "open");
 
             var close = document.getElementById("toggleClose");
             close.addEventListener('click', toggleClose, false);
-            close.setAttribute("class", "display");
-
+            close.setAttribute("style", "visibility: visible;");
         }
 
-        var close = function() {
+        function toggleClose() {
+            var open = document.getElementById("toggleOpen");
+            content.setAttribute("class", "");
+            logo.setAttribute("style", "display: none;")
+            copy.setAttribute("class", "visibility-hidden");
+            open.setAttribute("style", "visibility: visible;");
+            slide.setAttribute("name", "");
 
+            var open = document.getElementById("toggleOpen"),
+                close = document.getElementById("toggleClose");
+            close.setAttribute("style", "visibility: hidden;");
+            open.addEventListener('click', toggleOpen, false);
         }
+
+        window.onresize = function(event) {
+            var open = document.getElementById("toggleOpen"),
+                close = document.getElementById("toggleClose");
+            if(window.innerWidth >= 768) {
+                toggleClose();
+                logo.setAttribute("style", "display: inline-block;")
+            } else {
+                if(!slide.hasAttribute("name", "open")) {
+                    logo.setAttribute("style", "display: none;");
+                    open.setAttribute("style", "visibility: visible;");
+                    close.setAttribute("style", "visibility: hidden;");
+                } else {
+                    toggleOpen();
+                    logo.setAttribute("style", "display: inline-block;");
+                    open.setAttribute("style", "visibility: hidden;");
+                    close.setAttribute("style", "visibility: visible;");
+                }
+            }
+        };
 
         open.addEventListener('click', toggleOpen, false);
+        open.setAttribute("style", "visibility: visible;");
     }
-
-
 })();
 

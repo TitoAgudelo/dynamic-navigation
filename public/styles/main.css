@@ -111,7 +111,7 @@ header nav ul li .sub-menu li a {
   padding: 16px;
 }
 
-header nav ul li .sub-menu li:hover a {
+header nav ul li .sub-menu li a:hover {
   color: #ec008c;
   background-color: #eee;
 }
@@ -160,8 +160,12 @@ header nav ul li .caret {
   font-size: 25px;
 }
 
-.copy {
+.copy, #copy {
   display: none;
+}
+
+.toggle-menu #toggleOpen, .toggle-menu #toggleClose {
+  visibility: hidden;
 }
 
 @media screen and (max-width: 767px) {
@@ -184,6 +188,7 @@ header nav ul li .caret {
     background-color: #ec008c; 
     position: absolute;
     width: 118%;
+    z-index: 1000;
   }
 
   header .title-area .name {
@@ -191,7 +196,7 @@ header nav ul li .caret {
   }
 
   header nav ul.title-area .toggle-menu {
-    display: block;
+    display: inline;
     width: 100%;
   }
 
@@ -208,20 +213,103 @@ header nav ul li .caret {
   }
 
   header nav ul#menu-navigation {
-    margin-left: 0;
     margin-top: 60px;
+    margin-left: 0;
     background-color: white;
     padding: 12px 0;
     position: absolute;
+    width: 100%;
+    display: none;
+    -webkit-transition: width 3s;
+    -webkit-transition-delay: 1s;
+    transition: width 3s;
+    transition-delay: 1s;
+  }
+
+  header nav ul#menu-navigation[name^="open"] {
+    display: block;
   }
  
   header nav ul#menu-navigation a {
     color: black;
+    font-size: 14px;
+    height: 14px;
+    padding: 14px 24px;
   }
 
-  header nav ul#menu-navigation li:hover a {
-    color: #ec008c;
+  header nav ul#menu-navigation li a:hover {
     background-color: #eee;
+  }
+
+  header  nav ul#menu-navigation li .up {
+    background: url("../images/circle-up.png");
+    background-repeat: no-repeat;
+    background-size: 21px;
+    height: 21px;
+    width: 21px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 14px;
+    cursor: pointer;
+  }
+
+  header  nav ul#menu-navigation li .down {
+    background: url("../images/circle-down.png");
+    background-repeat: no-repeat;
+    background-size: 21px;
+    height: 21px;
+    width: 21px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 14px;
+    cursor: pointer;
+  }
+
+  header nav ul li .sub-menu {
+    display: none;
+    background: white;
+    position: relative;
+    width: auto;
+    padding: 12px 0;
+    z-index: 1000;
+  }
+
+  header nav ul li .sub-menu li a {
+    font-size: 12px !important;
+    font-family: initial;
+  }
+
+  header nav ul li .sub-menu li a:hover {
+    background-color: #eee;
+    color: #ec008c !important;
+  }
+
+  .page {
+    background-size: 100% 300px;
+    height: 240px;
+    padding-top: 60px;
+  }
+
+  .page h1 {
+    position: absolute;
+    margin: 50px 0;
+    padding: 0 24px;
+    color: black;
+    font-size: 44px;
+  }
+
+  .lorem {
+    margin-top: 188px;
+    padding: 0 24px;
+  }
+
+  .lorem p {
+    width: auto;
+    font-size: 14px;
   }
 
   .menu_bar {
@@ -290,6 +378,7 @@ header nav ul li .caret {
     background-image: url("../images/toggle-close.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    float: right;
   }
 
   .copy {
@@ -300,17 +389,30 @@ header nav ul li .caret {
     display: none;
   }
 
-  .displayNone {
-    visibility: hidden;
+  #name {
+    display: none;
+  }
+
+  /* helpers */
+  .display-none {
+    display: none;
   }
 
   .display {
+    display: block;
+  }
+
+  .visibility-hidden {
+    visibility: hidden;
+  }
+
+  .visibility {
     visibility: visible;
   }
 
   #slide {
     position: absolute;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     -webkit-animation: slide 0.5s forwards;
