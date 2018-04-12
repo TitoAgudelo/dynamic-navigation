@@ -1,14 +1,22 @@
 (function() {
-    $.ajax({
-        url: '/api/nav.json',
-        dataType: "json",
-        type: 'GET',
-        success: function (data) {
-            navigation(data);
-        },
-        error: function (xhr, status, error) {
-            console.log('Error: ' + error.message);
-        },
+    var url = '/api/nav.json';
+    fetch(url) // Call the fetch function passing the url of the API as a parameter
+    .then(
+        function(response) {
+            if (response.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+                return;
+            }
+
+            // Examine the text in the response
+            response.json().then(function(data) {
+                navigation(data);
+            });
+        }
+    )
+    .catch(function(err) {
+        console.log('Fetch Error :-S', err);
     });
 
     function navigation(data) {
@@ -17,7 +25,7 @@
         	parent =  "",
 			subMenu = "";
         // for for first menu parents
-        for(var i=0 ; i<count ; i++) {
+        for(var i=0 ; i < count ; i++) {
 			var item = data.items[i],
 				childCount = item.items.length;
 
@@ -29,23 +37,23 @@
 		        	childCount--;
 	    		}
                 // if childrends concat html
-    			parent += '<li class="principal"><a href="'+item.url+'" target="_blank">'+item.label+'</a><span class="down"></span><ul class="sub-menu">'+subMenu+'</ul></li>';
+    			parent += '<li class="principal"><a href="#">'+item.label+'</a><span class="down"></span><ul class="sub-menu">'+subMenu+'</ul></li>';
 
     		} else {
     			// if no childrens concact html
     			parent += '<li class="principal"><a href="'+item.url+'" target="_blank">'+item.label+'</a></li>';
-    		
+
     		}
     	}
-    	
+
         // inner html in navigation
     	document.getElementById("menu-navigation").innerHTML = parent;
-        // run clickELement for event click listener 
+        // run clickELement for event click listener
         clickElement();
         mobile();
     };
 
-    function clickElement(){ 
+    function clickElement(){
         var items = document.getElementsByClassName("principal");
 
         var myFunction = function() {
@@ -59,7 +67,7 @@
             } else {
                 // else get all active and get a first element and is unique
                 var active = document.getElementsByClassName("active")[0];
-                // if active exist 
+                // if active exist
                 if (active != undefined) {
                     // set class for ""
                     active.setAttribute("class", "");
@@ -67,7 +75,7 @@
                     // else set active li
                     this.setAttribute("class", "active");
                     var child = document.getElementsByClassName("active")[0].getElementsByTagName("a");
-                    // mask when menu have child 
+                    // mask when menu have child
                     if(child.length > 1) {
                         page.setAttribute("class", "allContent");
                         page.addEventListener('click', unMenu, false);
@@ -79,8 +87,8 @@
                 this.getElementsByClassName("down")[0].setAttribute("class", "up");
             } else if(this.getElementsByClassName("up")[0]){
                 this.getElementsByClassName("up")[0].setAttribute("class", "down");
-                
-            }         
+
+            }
         };
 
         var unMenu = function() {
@@ -108,7 +116,7 @@
             logo = document.getElementById("name");
 
         function toggleOpen() {
-            
+
             content.setAttribute("class", "content");
             logo.setAttribute("style", "display: inline-block;")
             copy.setAttribute("class", "visibility");
